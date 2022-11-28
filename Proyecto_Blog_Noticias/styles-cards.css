@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+:root {
+    --blanco-titulos: #fff;
+    --gris-cuerpo: #858585;
+    --btn: #ffff00;
+    --btn-hover: #cfcf00;
+}
+
+body {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Noticias centrales grandes */
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 20rem;
+    border-radius: 36px;
+    overflow: hidden;
+
+}
+
+.card .card-bg {
+    width: 100%;
+    height: 100%;
+
+}
+
+.card .card-bg img {
+    width: 100%;
+    height: 100%;
+    transition: .2s ease-out;
+}
+
+.card:hover .card-bg img {
+    transform: scale(1.05);
+}
+
+.card .card-context {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 38%;
+    font-family: 'Poppins', 'Nunito';
+    transform: translateY(68%);
+    transition: .2s ease-out;
+}
+
+.card:hover .card-context {
+    transform: translateY(0);
+}
+
+.card .card-context .dark-bg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.2);
+    background: linear-gradient(rgba(0, 0, 0, .4),
+            rgba(0, 0, 0, .9));
+    filter: blur(20px);
+    transition: .2s ease-out;
+}
+
+.card .card-context h2 {
+    position: absolute;
+    left: 32px;
+    color: var(--blanco-titulos);
+}
+
+.card .card-context p {
+    position: absolute;
+    left: 32px;
+    top: 36px;
+    width: 82%;
+    line-height: 20px;
+    word-spacing: -2px;
+    color: var(--gris-cuerpo);
+    text-align: justify;
+    opacity: 0;
+    transition: .2s ease-out;
+}
+
+.card:hover .card-context p {
+    opacity: 1;
+}
+
+.card .card-context button {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    right: 32px;
+    color: black;
+    background: var(--btn);
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px;
+    transition: .4s;
+}
+
+.card .card-context button:hover {
+    background-color: var(--btn-hover);
+}
+
+/* Noticias centrales laterales */
+
+.noticiasCentrales .card {
+    position: relative;
+    width: 100%;
+    height: 10rem;
+    border-radius: 36px;
+    overflow: hidden;
+}
+
+.noticiasCentrales .card .card-context button {
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    right: 32px;
+    color: black;
+    background: var(--btn);
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px;
+    transition: .4s;
+}
+.noticiasCentrales .card .card-context button:hover {
+    background-color: var(--btn-hover);
+}
+
+.noticiasCentrales .card .card-context h2 {
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    color: var(--blanco-titulos);
+    bottom: 50px;
+}
+
+.noticiasCentrales .card .card-context p {
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    top: 36px;
+    bottom: 100px;
+    width: 82%;
+    line-height: 20px;
+    word-spacing: -2px;
+    background: var(--btn);
+    text-align: justify;
+    opacity: 0;
+    transition: .2s ease-out;
+}
+
+.noticiasCentrales .card:hover .card-context p {
+    opacity: 1;
+}
