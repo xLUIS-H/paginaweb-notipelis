@@ -5,9 +5,9 @@ class FuncionesBDNoticias
 
     public function __construct()
     {
-        FuncionesBDNoticias::$conexion = mysqli_connect('localhost', 'usuario', '1234', 'blognoticiasgaming');
+        // FuncionesBDNoticias::$conexion = mysqli_connect('localhost', 'usuario', '1234', 'blognoticiasgaming');
         // FuncionesBDNoticias::$conexion = mysqli_connect("localhost", "1149442", "Neydi281101", "1149442");
-        // FuncionesBDNoticias::$conexion = mysqli_connect("localhost", "1149448", "Neydi281101", "1149448");
+        FuncionesBDNoticias::$conexion = mysqli_connect("localhost", "1149448", "Neydi281101", "1149448");
 
         if (!FuncionesBDNoticias::$conexion) {
             echo ("Error en la conexión a la base de datos");
@@ -33,6 +33,16 @@ class FuncionesBDNoticias
             $resultado = mysqli_query(FuncionesBDNoticias::$conexion, $sql);
 
             return $resultado;
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
+    }
+
+    public function agregarSuscriptor($id_suscriptor, $nombre, $celular, $correo, $fecha_suscripcion, $usuario, $password, $estado) {
+        try {
+            $sql = "INSERT INTO suscriptores (id_suscriptor, nombre, celular, correo, fecha_suscripcion, usuario, password, estado) VALUES ('$id_suscriptor', '$nombre', '$celular', '$correo', '$fecha_suscripcion', '$usuario',  HEX(AES_ENCRYPT('$password','neydi28')), '$estado')";
+            
+            return mysqli_query(FuncionesBDNoticias::$conexion, $sql);
         } catch (\Throwable $th) {
             var_dump($th);
         }

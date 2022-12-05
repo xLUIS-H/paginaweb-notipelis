@@ -1,16 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
 :root {
     --azul-oscuro: #021226;
     --azul-claro: #A9A7D9;
     --azul-morado: #4E458C;
     --verde: #02733E;
     --amarillo: #C6D93B;
-  }
-  
+}
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
 }
 
 body {
@@ -38,7 +41,7 @@ body {
     /* border-top-color: #4bc8eb; */
     border-top-color: var(--azul-morado);
     /* border-bottom-color: #f13a8f; */
-    border-bottom-color:var(--azul-claro);
+    border-bottom-color: var(--azul-claro);
 }
 
 .loader-wrapper .loader-inner {
@@ -55,4 +58,96 @@ body {
     100% {
         transform: scale(.6) rotate(-360deg);
     }
+}
+
+
+.window-notice {
+    background: rgba(33, 41, 52, .85);
+    bottom: 0;
+    display: flex;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    transition: background .6s;
+}
+
+.window-notice .content {
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(33, 41, 52, .75);
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 600px;
+    min-width: 320px !important;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 2rem;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.content-buttons-error {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.content-buttons-error a {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50px;
+    padding: 1rem;
+    background-color: #de0000;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.content-buttons-login {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.content-buttons-login a {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50px;
+    padding: 1rem;
+    background-color: var(--azul-morado);
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.content-buttons-success {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.content-buttons-success a {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50px;
+    padding: 1rem;
+    background-color: #11c201;
+    color: #FFF;
+    text-transform: uppercase;
+}
+/* 
+.content-buttons a:hover {
+    background-color: #006AB8;
+} */
+
+.content-text a {
+    color: #0080DE;
+    text-decoration: none;
+    text-align: center;
+}
+
+.content-text a:hover {
+    color: #006AB8;
+    text-decoration: underline;
+    text-align: center;
 }

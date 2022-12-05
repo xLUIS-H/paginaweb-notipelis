@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="style-menu-nav.css">
     <script src="funciones.js"></script>
-    <script src="https://kit.fontawesome.com/bafeac60c3.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/00a4986da9.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -31,7 +31,7 @@
                 </label>
                 <a href="#" class="enlace">
                     <!-- <img src="iconos/icons8-control-96.png" alt="" class="logo"> -->
-                    <i class="fa-solid fa-gamepad fa-3x"></i>
+                    <i class="fa-solid fa-film fa-2x" style="color: #A9A7D9;"></i>
                 </a>
                 <ul>
                     <li><a href="administradores.php">ADMINISTRADORES</a></li>

@@ -10,20 +10,19 @@ $_SESSION['user'] = $usuario;
 // $conexion = mysqli_connect("localhost", "1149442", "Neydi281101", "1149442");
 $conexion = mysqli_connect("localhost", "1149448", "Neydi281101", "1149448");
 
-$consulta = "SELECT * FROM administradores WHERE usuario ='$usuario' and password = HEX(AES_ENCRYPT('$password','neydi28')) and estado = 1";
+$consulta = "SELECT * FROM suscriptores WHERE usuario ='$usuario' and password = HEX(AES_ENCRYPT('$password','neydi28')) and estado = 1";
 $resultado = mysqli_query($conexion, $consulta);
 $filas = mysqli_num_rows($resultado);
 
 if($filas) {
-    header('location: ../administracion/loading-page-to-admins.php?code=login-success');
     session_start();
-    $_SESSION["admin"] = true;
+    $_SESSION["suscriptor"] = true;
+    header('location: loading-page-to-index.php?code=login-success');
 } else {
      echo "<script>
                 alert('Comprueba tu usuario o contraseña');
-                window.location= '../administracion/index.php'
+                window.location= 'iniciarSesion.php'
     </script>";
-    // header('location: ../administracion/index.php');
 }
 
 mysqli_free_result($resultado);

@@ -37,7 +37,7 @@ $objUserSession->verificarSesion()
             </tr>
 
             <?php
-            $resultado = $objbd->seleccionarNoticia();
+            $resultado = $objbd->seleccionarNoticias();
             while ($row = mysqli_fetch_assoc($resultado)) {
                 if ($row['estado'] == 1) {
                     $estado = "Activo";
@@ -48,8 +48,8 @@ $objUserSession->verificarSesion()
                     <tr>
                         <td>' . $row['titulo'] . '</td>
                         <td>' . $estado . '</td>
-                        <td><a href="editarNoticia.php?variable=valor"><i class="fa-solid fa-pencil"></i></a></i></td>
-                        <td><i class="fa-solid fa-trash"></i></td>
+                        <td><a href="editarNoticia.php?idnoticia='.$row['id_noticia'].'"><i class="fa-solid fa-pencil"></i></a></i></td>
+                        <td><a onclick="return confirm(\'Desea eliminar la noticia '.$row['titulo'].'?\');"  href="funciones_php/funciones_noticias/funcion_eliminar_noticia.php?idNoticia='.$row['id_noticia'].'"><i class="fa-solid fa-trash"></i></td>
                         
                     </tr>
                 ');

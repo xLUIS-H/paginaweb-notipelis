@@ -7,26 +7,21 @@ $objbd = new FuncionesBD();
 $objUserSession->iniciarSesion();
 $objUserSession->verificarSesion();
 
-$usuario = $_POST['user'];
-$password = $_POST['pass'];
-$rfc = $_POST['rfc'];
-$nombre = $_POST['nombre'];
-$estado = $_POST['estado'];
+$idNoticia = $_GET['idNoticia'];
 
-$addAdmin = $objbd->agregarAdministrador($usuario, $password, $rfc, $nombre, $estado);
+$addAdmin = $objbd->eliminarNoticia($idNoticia);
 
 if ($addAdmin) {
-    $codigo = 'success';
+    $codigo = 'delete';
 } else {
     $codigo = 'error';
 }
 
 
-header('location: ../../loading-page-to-admins.php?code='.$codigo.'');
+header('location: ../../loading-page-to-noticias.php?code='.$codigo.'');
 session_start();
-$_SESSION["admin"] = true;
 
-session_start();
+$_SESSION["admin"] = true;
 
 $_SESSION['user'] = $usuario;
 

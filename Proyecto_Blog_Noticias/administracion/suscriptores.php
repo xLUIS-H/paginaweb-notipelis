@@ -31,17 +31,16 @@
         <table width="100%" class="tablaListaAdmin">
             <tr>
                 <td class="tdEncabezado">Nombre</td>
+                <td class="tdEncabezado">Usuario</td>
                 <td class="tdEncabezado">Celular</td>
                 <td class="tdEncabezado">Correo</td>
                 <td class="tdEncabezado">Fecha de Suscripción</td>
-                <td class="tdEncabezado">Usuario</td>
-                <td class="tdEncabezado">Password</td>
                 <td class="tdEncabezado">Estado</td>
                 <td class="tdEncabezado"></td>
                 <td class="tdEncabezado"></td>
             </tr>
             <?php
-            $resultado = $objbd->seleccionarSuscriptor();
+            $resultado = $objbd->seleccionarSuscriptores();
             while ($row = mysqli_fetch_assoc($resultado)) {
                 if ($row['estado'] == 1) {
                     $estado = "Activo";
@@ -51,24 +50,19 @@
                 echo ('
                     <tr>
                         <td>' . $row['nombre'] . '</td>
+                        <td>' . $row['usuario'] . '</td>
                         <td>' . $row['celular'] . '</td>
                         <td>' . $row['correo'] . '</td>
                         <td>' . $row['fecha_suscripcion'] . '</td>
-                        <td>' . $row['usuario'] . '</td>
-                        <td>' . $row['password'] . '</td>
                         <td>'.$estado.'</td>
-                        <td><a href="editarSuscriptor.php?variable=valor"><i class="fa-solid fa-pencil"></i></a></i></td>
-                        <td><i class="fa-solid fa-trash"></i></td>
+                        <td><a href="editarSuscriptor.php?usuario='.$row['usuario'].'"><i class="fa-solid fa-pencil"></i></a></i></td>
+                        <td><a onclick="return confirm(\'¿Desea eliminar el suscriptor '.$row['nombre'].'?\');" href="funciones_php/funciones_suscriptor/funcion_eliminar_suscriptor.php?usuario='.$row['usuario'].'"><i class="fa-solid fa-trash"></i></td>
                         
             </tr>
                         ');
             }
             ?>
         </table>
-        <!-- <div class="divBtnRegistrarAdmin">
-            <button class="btnRedireccionAgregarAdmin" onclick="location.href='agregarSuscriptor.php'">AGREGAR
-                SUSCRIPTOR</button>
-        </div> -->
     </main>
 </body>
 

@@ -1,7 +1,10 @@
 <?php
-    require_once("funciones_php/funciones_php_session.php");
-    $objUserSession = new userSession();
-    $objUserSession->iniciarSesion();
+require("funciones_php/funciones_php_session.php");
+require("funciones_php/funciones_bd.php");
+$objUserSession = new userSession();
+$objbd = new FuncionesBD();
+$objUserSession->iniciarSesion();
+$objUserSession->verificarSesion();
 ?>
 
 <!DOCTYPE html>
@@ -18,21 +21,21 @@
     <script src="https://kit.fontawesome.com/bafeac60c3.js" crossorigin="anonymous"></script>
 
     <?php
-        require("menu-superior-navegacion.php")
-    ?>
+    require("menu-superior-navegacion.php")
+        ?>
 
 </head>
 
 <body>
     <main class="mainAgregarAdmin" align="center">
-        <form action="../administracion/funciones_php/funciones_admin/funcion_agregar_admin.php" method="post" autocomplete="off" onsubmit="return errorSubmit()"
-            class="contenedorRegistro">
+        <form action="../administracion/funciones_php/funciones_admin/funcion_agregar_admin.php" method="post"
+            autocomplete="off" onsubmit="return errorSubmit()" class="contenedorRegistro">
             <input type="text" name="rfc" id="rfc" placeholder="RFC" maxlength="13" minlength="13"
                 onkeypress="return valideKeyLetrasNumeros(event)" required class="inputRFC">
             <input type="text" name="nombre" id="nombre" placeholder="Nombre" onkeypress="return valideKeyLetras(event)"
-                required>
+                required">
             <input type="text" name="user" id="usuarioRegistro" placeholder="Usuario"
-                onkeypress="return valideUsuario(event)" required>
+                onkeypress="return valideUsuario(event)" required onblur="verificarUsuario()">
             <input type="password" name="pass" id="passwordRegistro" placeholder="Contraseña"
                 onblur="mostrarErrorDiferentePassword()" required minlength="8">
             <input type="password" name="pass" id="passwordVerify" placeholder="Verifica tu contraseña"

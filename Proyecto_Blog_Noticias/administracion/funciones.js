@@ -86,3 +86,10 @@ function asignarClaseActivoAdmin() {
         document.getElementById("menuNavAdmin").addClass('active');
     }
 }
+
+
+function verificarUsuario() {
+    if (document.getElementById('usuarioRegistro').value == 'luis') {
+        alert('iguales');
+    }
+}

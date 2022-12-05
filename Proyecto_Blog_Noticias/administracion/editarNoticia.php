@@ -1,8 +1,10 @@
 <?php
-    require_once("funciones_php/funciones_php_session.php");
-    $objUserSession = new userSession();
-    $objUserSession->iniciarSesion();
-    $objUserSession->verificarSesion(); 
+require("funciones_php/funciones_php_session.php");
+require("funciones_php/funciones_bd.php");
+$objUserSession = new userSession();
+$objbd = new FuncionesBD();
+$objUserSession->iniciarSesion();
+$objUserSession->verificarSesion();
 ?>
 
 <!DOCTYPE html>
@@ -19,26 +21,56 @@
     <script src="https://kit.fontawesome.com/bafeac60c3.js" crossorigin="anonymous"></script>
 
     <?php
-        require("menu-superior-navegacion.php")
-    ?>
-    
+    require("menu-superior-navegacion.php")
+        ?>
+
 </head>
 
 <body>
     <main class="mainAgregarAdmin" align="center">
-    <form action="loading-page-to-admins.html" autocomplete="off" onsubmit="return errorSubmit()"
-            class="contenedorRegistro">
-                <input type="text" name="titulo" id="titulo" placeholder="Título" required>
-                <textarea class="textAreaEncabezado" name="noticia" id="noticia" placeholder="Encabezado" required ></textarea>
-                <textarea class="textAreaNoticia" name="noticia" id="noticia" placeholder="Noticia" required ></textarea>
-                <input type="file" name="imagen" id="img" class="inputFile">
-                <select name="estatus" id="estatus" required>
-                    <option value="" selected disabled>--Selecciona el estatus--</option>
-                    <option value="1">Activo</option>
-                    <option value="2">Inactivo</option>
-                </select>
-                <button type="reset" class="btnLimpiarAgregarAdmin">Limpiar Campos</button>
-                <button type="submit" class="btnAgregarAdmin">Guardar Cambios</button>
+        <form action="../administracion/funciones_php/funciones_noticias/funcion_editar_noticia.php" method="post"
+            enctype="multipart/form-data" autocomplete="off" onsubmit="return errorSubmit()" class="contenedorRegistro">
+            <?php
+            $idnoticia = $_GET['idnoticia'];
+            $resultado = $objbd->seleccionarNoticia($idnoticia);
+            $row = mysqli_fetch_assoc($resultado);
+
+            echo('
+                <input type="hidden" name="idNoticia" value=' . $idnoticia . '>
+            ');
+            ?>
+            <input type="text" name="titulo" id="titulo" placeholder="Título" required value="<?= $row['titulo']; ?>">
+            <textarea class="textAreaEncabezado" name="encabezado" id="encabezado" placeholder="Encabezado"
+                required><?= $row['encabezado']; ?></textarea>
+            <textarea class="textAreaNoticia" name="noticia" id="noticia" placeholder="Noticia"
+                required><?= $row['noticia']; ?></textarea>
+            <label for="">Agrega una imagen para la noticia.</label>
+            <div>
+                <input type="file" name="imagen" id="img" class="inputFile"><br>
+                <small class="alertaArchivo">Solo archivos en formato .jpg, .jpeg o png</small>
+            </div>
+
+            <?php
+                if ($row['estado'] == 1) {
+                    echo ('
+                    <select name="estado" id="estatus" required>
+                        <option value="" disabled>--Selecciona el estatus--</option>
+                        <option selected value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>
+                    ');
+                } else {
+                    echo ('
+                        <select name="estado" id="estatus" required>
+                            <option value="" disabled>--Selecciona el estatus--</option>
+                            <option value="1">Activo</option>
+                            <option selected value="2">Inactivo</option>
+                        </select>
+                    ');
+                }
+                ?>
+            <button type="reset" class="btnLimpiarAgregarAdmin">Limpiar Campos</button>
+            <button type="submit" class="btnAgregarAdmin">Guardar Cambios</button>
         </form>
     </main>
 </body>

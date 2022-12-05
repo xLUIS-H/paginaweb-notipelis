@@ -1,3 +1,9 @@
+<?php
+require_once("funciones_php_session.php");
+$objSuscriptorSession = new suscriptorSession();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,17 +30,33 @@
                 </label>
                 <a href="#" class="enlace">
                     <!-- <img src="iconos/icons8-control-96.png" alt="" class="logo"> -->
-                    <i class="fa-solid fa-gamepad fa-3x"></i>
+                    <i class="fa-solid fa-film fa-2x" style="color: #A9A7D9;"></i>
                 </a>
                 <ul>
-                    <li><a href="administradores.php">ADMINISTRADORES</a></li>
-                    <li><a href="suscriptores.php">SUSCRIPTORES</a></li>
-                    <li><a href="noticias.php">NOTICIAS</a></li>
+                    <li><a href="index.php">INICIO</a></li>
+                    <?php
+                    if (isset($_SESSION["suscriptor"])) {
+                        echo ('
+                            <li>
+                            <abbr title="Cerrar Sesión">
+                                <a href="logout.php">
+                                <i class="fa-solid fa-power-off" style="color: #A9A7D9;"></i>
+                                </a>
+                            </abbr>
+                            </li>
+                        ');
+                    } else {
+                        echo ('
                     <li>
-                        <a href="index.html">
-                            <i class="fa-solid fa-right-from-bracket"></i>
+                    <abbr title="Iniciar Sesión">
+                        <a href="iniciarSesion.php">
+                        <i class="fa-regular fa-user fa-lg" style="color: #A9A7D9;"></i>
                         </a>
+                    </abbr>
                     </li>
+                    ');
+                    }
+                    ?>
                 </ul>
             </nav>
         </div>

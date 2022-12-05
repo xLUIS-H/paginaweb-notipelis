@@ -7,7 +7,6 @@ $objUserSession->verificarSesion();
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,9 +15,7 @@ $objUserSession->verificarSesion();
     <link rel="stylesheet" href="style-loading-page.css">
     <script src="https://kit.fontawesome.com/00a4986da9.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-
     <div class="loader-wrapper">
         <div class="loader loader-outer">
             <div class="loader loader-inner">
@@ -26,34 +23,28 @@ $objUserSession->verificarSesion();
         </div>
     </div>
 
-        <?php
+    <?php
             switch ($_GET['code']) {
-                case 'error01':
-                    $codigoError = '<br>Error al cargar la imagen.<br><br> Noticia no agregada.<br>';
+                case 'error':
+                    $codigoError = '<br>Error.<br><br> Operación no realizada.<br>';
                     break;
-                case 'error02':
-                    $codigoError = '<br>Error: El tipo de archivo no está permitido.<br><br> Noticia no agregada.<br>';
-                    break;
-                case 'error03':
-                    $codigoError = '<br>Error: El archivo es demasiado grande.<br><br> Noticia no agregada.<br>';
-                    break;
-                case 'error04':
-                    $codigoError = '<br>Error: Ningún archivo seleccionado.<br><br> Noticia no agregada.<br>';
-                    break;
-                case 'delete' :
-                    $codigoError = '<br>Noticia eliminada correctamente.<br>';
-                    break;
+                case 'success':
+                        $codigoError = '<br>¡Hecho!<br><br> Operación realizada correctamente.<br>';
+                        break;
                 default:
-                    $codigoError = '<br>Noticia agregada correctamente.<br>';
+                    $codigoError = '<br>Iniciando sesión...<br>';
                     break;
             }
 
-            if ($_GET['code'] == 'success' || $_GET['code'] == 'delete') {
+            if ($_GET['code'] == 'success') {
                 $icono = '<i class="fa-solid fa-check fa-bounce"></i>';
                 $clase = 'content-buttons-success';
-            } else {
+            } else if ($_GET['code'] == 'error') {
                 $icono = '<i class="fa-solid fa-xmark fa-shake"></i>';
                 $clase = 'content-buttons-error';
+            } else {
+                $icono = '<i class="fa-solid fa-spinner fa-spin-pulse"></i>';
+                $clase = 'content-buttons-login';
             }
             
             echo('
@@ -72,8 +63,7 @@ $objUserSession->verificarSesion();
         ?>
 
     <script>
-        setTimeout("location.href='noticias.php'", 2000);
+        setTimeout("location.href='administradores.php'", 2000);
     </script>
 </body>
-
 </html>

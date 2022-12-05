@@ -9,9 +9,16 @@ $objUserSession->verificarSesion();
 
 $user = $_GET['usuario'];
 
-$objbd->eliminarAdministrador($user);
+$addAdmin = $objbd->eliminarAdministrador($user);
 
-header('location: ../../loading-page-to-admins.html');
+if ($addAdmin) {
+    $codigo = 'success';
+} else {
+    $codigo = 'error';
+}
+
+
+header('location: ../../loading-page-to-admins.php?code='.$codigo.'');
 session_start();
 
 $_SESSION["admin"] = true;

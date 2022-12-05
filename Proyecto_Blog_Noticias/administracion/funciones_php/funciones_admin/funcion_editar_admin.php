@@ -13,9 +13,16 @@ $rfc = $_POST['rfc'];
 $nombre = $_POST['nombre'];
 $estado = $_POST['estado'];
 
-$objbd->editarAdministrador($usuario, $password, $rfc, $nombre, $estado);
+$addAdmin = $objbd->editarAdministrador($usuario, $password, $rfc, $nombre, $estado);
 
-header('location: ../../loading-page-to-admins.html');
+if ($addAdmin) {
+    $codigo = 'success';
+} else {
+    $codigo = 'error';
+}
+
+
+header('location: ../../loading-page-to-admins.php?code='.$codigo.'');
 session_start();
 
 $_SESSION["admin"] = true;

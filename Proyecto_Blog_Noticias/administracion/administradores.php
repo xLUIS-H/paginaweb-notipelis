@@ -52,7 +52,7 @@ $objUserSession->verificarSesion();
                         <td>' . $row['usuario'] . '</td>
                         <td>'.$estado.'</td>
                         <td><a href="editarAdmin.php?usuario='.$row['usuario'].'"><i class="fa-solid fa-pencil"></i></a></i></td>
-                        <td><a href="funciones_php/funciones_admin/funcion_eliminar_admin.php?usuario='.$row['usuario'].'"><i class="fa-solid fa-trash"></i></td>
+                        <td><a onclick="return confirm(\'¿Desea eliminar el administrador '.$row['nombre'].'?\');" href="funciones_php/funciones_admin/funcion_eliminar_admin.php?usuario='.$row['usuario'].'"><i class="fa-solid fa-trash"></i></td>
                         
                     </tr>
                 ');

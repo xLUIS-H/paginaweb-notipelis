@@ -8,12 +8,9 @@ $objUserSession->iniciarSesion();
 $objUserSession->verificarSesion();
 
 $usuario = $_POST['user'];
-$password = $_POST['pass'];
-$rfc = $_POST['rfc'];
-$nombre = $_POST['nombre'];
 $estado = $_POST['estado'];
 
-$addAdmin = $objbd->agregarAdministrador($usuario, $password, $rfc, $nombre, $estado);
+$addAdmin = $objbd->editarSuscriptor($usuario, $estado);
 
 if ($addAdmin) {
     $codigo = 'success';
@@ -22,17 +19,10 @@ if ($addAdmin) {
 }
 
 
-header('location: ../../loading-page-to-admins.php?code='.$codigo.'');
+header('location: ../../loading-page-to-subs.php?code='.$codigo.'');
 session_start();
+
 $_SESSION["admin"] = true;
 
-session_start();
-
 $_SESSION['user'] = $usuario;
-
-
-
-mysqli_free_result($resultado);
-mysqli_close($conexion);
-
 ?>

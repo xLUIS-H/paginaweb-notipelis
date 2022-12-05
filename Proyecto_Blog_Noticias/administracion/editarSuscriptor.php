@@ -1,8 +1,10 @@
 <?php
-    require_once("funciones_php/funciones_php_session.php");
-    $objUserSession = new userSession();
-    $objUserSession->iniciarSesion();
-    $objUserSession->verificarSesion(); 
+require_once("funciones_php/funciones_php_session.php");
+require("funciones_php/funciones_bd.php");
+$objUserSession = new userSession();
+$objbd = new FuncionesBD();
+$objUserSession->iniciarSesion();
+$objUserSession->verificarSesion();
 ?>
 
 <!DOCTYPE html>
@@ -19,33 +21,53 @@
     <script src="https://kit.fontawesome.com/bafeac60c3.js" crossorigin="anonymous"></script>
 
     <?php
-        require("menu-superior-navegacion.php")
-    ?>
-    
+    require("menu-superior-navegacion.php")
+        ?>
+
 </head>
 
 <body>
     <main class="mainAgregarAdmin" align="center">
-        <form action="loading-page-to-admins.html" autocomplete="off" onsubmit="return errorSubmit()"
-            class="contenedorRegistro">
-                <input type="text" name="user" id="rfc" placeholder="RFC" maxlength="13" minlength="13"
-                    onkeypress="return valideKeyLetrasNumeros(event)" required class="inputRFC">
-                <input type="text" name="user" id="nombre" placeholder="Nombre"
-                    onkeypress="return valideKeyLetras(event)" required>
-                <input type="text" name="user" id="usuarioRegistro" placeholder="Usuario"
-                    onkeypress="return valideUsuario(event)" required>
-                <input type="password" name="pass" id="passwordRegistro" placeholder="Contraseña" required
-                    minlength="8">
-                <input type="password" name="pass" id="passwordVerify" placeholder="Verifica tu contraseña"
-                    onblur="mostrarErrorDiferentePassword()" required minlength="8">
-                <small class="errorDiferentePassword" id="errorPassword">Las contraseñas no coinciden</small>
-                <select name="estatus" id="estatus" required>
-                    <option value="" selected disabled>--Selecciona el estatus--</option>
-                    <option value="1">Activo</option>
-                    <option value="2">Inactivo</option>
-                </select>
-                <button type="reset" class="btnLimpiarAgregarAdmin">Limpiar Campos</button>
-                <button type="submit" class="btnAgregarAdmin">Guardar Cambios</button>
+        <form action="../administracion/funciones_php/funciones_suscriptor/funcion_editar_suscriptor.php" method="post"
+            autocomplete="off" onsubmit="return errorSubmit()" class="contenedorRegistro">
+
+            <?php
+            $user = $_GET['usuario'];
+            $resultado = $objbd->seleccionarSuscriptor($user);
+            $row = mysqli_fetch_assoc($resultado);
+            ?>
+
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" onkeypress="return valideKeyLetras(event)"
+                required readonly value="<?=$row['nombre'];?>">
+            <input type="text" name="number" id="telefono" placeholder="Celular"
+                onkeypress="return valideKeyNumeros(event)" required minlength="10" maxlength="10" readonly value="<?=$row['celular'];?>">
+            <input type="email" name="email" id="correo" placeholder="Correo" onkeypress="" required readonly value="<?=$row['correo'];?>">
+            <input type="text" name="user" id="usuarioRegistro" placeholder="Usuario"
+                onkeypress="return valideUsuario(event)" required readonly value="<?=$row['usuario'];?>">
+            <input type="password" name="pass" id="passwordRegistro" placeholder="Contraseña" required minlength="8" readonly value="<?=$row['password'];?>">
+            <small class="errorDiferentePassword" id="errorPassword">Las contraseñas no coinciden</small>            
+
+            <?php
+                if ($row['estado'] == 1) {
+                    echo ('
+                        <select name="estado" id="estatus" required>
+                            <option value="" disabled>--Selecciona el estatus--</option>
+                            <option selected value="1">Activo</option>
+                            <option value="2">Inactivo</option>
+                        </select>
+                    ');
+                } else {
+                    echo ('
+                        <select name="estado" id="estatus" required>
+                            <option value="" disabled>--Selecciona el estatus--</option>
+                            <option value="1">Activo</option>
+                            <option selected value="2">Inactivo</option>
+                        </select>
+                    ');
+                }
+            ?>
+
+            <button type="submit" class="btnAgregarAdmin">Guardar Cambios</button>
         </form>
     </main>
 </body>

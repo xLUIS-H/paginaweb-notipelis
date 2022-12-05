@@ -55,7 +55,7 @@ $objUserSession->verificarSesion();
                     echo ('
                         <select name="estado" id="estatus" required>
                             <option value="" disabled>--Selecciona el estatus--</option>
-                            <option value="1">Activo</option>
+                            <option selected value="1">Activo</option>
                             <option value="2">Inactivo</option>
                         </select>
                     ');
